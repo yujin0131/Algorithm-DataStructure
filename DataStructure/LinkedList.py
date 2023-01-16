@@ -1,6 +1,6 @@
 class Node:                   # Node 클래스 정의
-    def __init__(self, data): # __init__ (constructor) 초기화 함수 > 인스턴스화 할 때 반드시 처음에 호출됨.  ( 블로그 정리 필요 )
-        self.data = data      # self : 인스턴스 자신 > constructor는 필수로 첫 인수를 self로 지정해야함
+    def __init__(self, value): # __init__ (constructor) 초기화 함수 > 인스턴스화 할 때 반드시 처음에 호출됨.  ( 블로그 정리 필요 )
+        self.value = value      # self : 인스턴스 자신 > constructor는 필수로 첫 인수를 self로 지정해야함
         self.next = None      # .next() : 다음 노드 search
 
 # Create LinkedList
@@ -8,15 +8,18 @@ class LinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
-        self.length = 1
+        self.length = 0
 
     # print LinkedList
     def printList(self):
         temp = self.head
+        print("result : ", end='')
         while temp is not None:
+            print(temp.data, end=' ')
             print(temp.value)
             temp = temp.next
 
+    # Add Node to end
     def append(self, value):
         newNode = Node(value)
         if self.head is None:
@@ -28,6 +31,7 @@ class LinkedList:
         self.length += 1
         return True
 
+    # pop the last Node
     def pop(self):
         if self.length == 0:
             return None
@@ -45,6 +49,7 @@ class LinkedList:
             self.tail = None
         return temp
 
+    # Add Node to start
     def prepend(self,value):
         newNode = Node(value)
         if self.head is None:
@@ -56,6 +61,7 @@ class LinkedList:
         self.length += 1
         return True
 
+    # pop the first Node
     def popFirst(self):
         if self.length == 0:
             return None
@@ -65,6 +71,7 @@ class LinkedList:
         self.length -= 1
         return temp
 
+    # get Node
     def get(self, index):
         if index < 0 or index >= self.length:
             return None
@@ -73,11 +80,13 @@ class LinkedList:
             temp = temp.next
         return temp
 
+    # set value at index
     def set_value(self, index, value):
         temp = self.get(index)
         temp.value = value
         return True
 
+    # Add Node at index
     def insert(self, index, value):
         # if index < 0 or index >= self.length:
         #     return None
@@ -94,6 +103,7 @@ class LinkedList:
         self.length += 1
         return True
 
+    # Remove Node at index
     def remove(self, index):
         if index < 0 or index >= self.length:
             return None
@@ -110,4 +120,19 @@ class LinkedList:
         return temp
         
 
+list = LinkedList()
 
+list.prepend(3)
+list.prepend(2)
+list.prepend(1)
+list.append(6)
+list.pop()
+list.append(7)
+list.insert(3,5)
+list.insert(3,4)
+list.insert(0,0)
+list.popFirst()
+list.remove(2)
+list.printList()
+
+print("answer : 1 2 4 5 7")
